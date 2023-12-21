@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cci657s8uwh24"]
+
+[ext_resource type="Script" path="res://Nodes/Cursor.cs" id="1_0hl2c"]
+[ext_resource type="Texture2D" uid="uid://dwnyer6ww320g" path="res://Assets/cursor.png" id="2_y5yax"]
+
+[node name="Cursor" type="Node2D"]
+script = ExtResource("1_0hl2c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_y5yax")
+
+[node name="InputDelay" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[connection signal="timeout" from="InputDelay" to="." method="_InputDelayRefresh"]
