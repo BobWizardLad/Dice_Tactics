@@ -8,9 +8,3 @@ script = ExtResource("1_j1cb2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_y5yax")
-
-[node name="InputDelay" type="Timer" parent="."]
-wait_time = 0.15
-one_shot = true
-
-[connection signal="timeout" from="InputDelay" to="." method="_InputDelayRefresh"]

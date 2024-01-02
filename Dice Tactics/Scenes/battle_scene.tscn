@@ -151,3 +151,8 @@ position = Vector2(16, 6)
 [node name="PlayerCam" type="Camera2D" parent="GameState"]
 position = Vector2(608, 314)
 zoom = Vector2(1.455, 1.455)
+
+[node name="InputDelay" type="Timer" parent="GameState"]
+wait_time = 0.1
+
+[connection signal="timeout" from="GameState/InputDelay" to="GameState" method="_InputDelayRefresh"]
