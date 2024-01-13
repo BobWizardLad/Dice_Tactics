@@ -155,4 +155,12 @@ zoom = Vector2(1.455, 1.455)
 [node name="InputDelay" type="Timer" parent="GameState"]
 wait_time = 0.1
 
-[connection signal="timeout" from="GameState/InputDelay" to="GameState" method="_InputDelayRefresh"]
+[node name="Coordinates" type="Label" parent="GameState"]
+offset_left = 350.0
+offset_top = 400.0
+offset_right = 390.0
+offset_bottom = 423.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[connection signal="timeout" from="GameState/InputDelay" to="GameState" method="_Input_Delay_Refresh"]

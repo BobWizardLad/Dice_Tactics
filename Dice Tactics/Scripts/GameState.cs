@@ -21,7 +21,6 @@ public partial class GameState : Node
 	private int Grid_Size;
 	// Grid array to store game state.
     private GridTile[] GameBoard;
-	// Called when the node enters the scene tree for the first time.
 	
 	// --------------------------------------------- BUILT-INS -----------------------------------------
 
@@ -53,23 +52,24 @@ public partial class GameState : Node
 			if (Input.IsActionPressed("CursorUp"))
 			{
 				Cursor.Cursor_Up();
-				ActivateInputDelay();
+				Activate_Input_Delay();
 			}
 			else if (Input.IsActionPressed("CursorDown"))
 			{
 				Cursor.Cursor_Down();
-				ActivateInputDelay();
+				Activate_Input_Delay();
 			}
 			if (Input.IsActionPressed("CursorLeft"))
 			{
 				Cursor.Cursor_Left();
-				ActivateInputDelay();
+				Activate_Input_Delay();
 			}
 			else if (Input.IsActionPressed("CursorRight"))
 			{
 				Cursor.Cursor_Right();
-				ActivateInputDelay();
+				Activate_Input_Delay();
 			}
+			Cursor_Pos_Refresh(Cursor.Position);
 		}
 	}
 
@@ -99,31 +99,37 @@ public partial class GameState : Node
 	// --------------------------------------------- METHODS -----------------------------------------
 
 	// Function to handle grid motion
-	public void _On_Cursor_Move(int x, int y)
+	public bool _On_Cursor_Move(int x, int y)
 	{
 		// Precalc
 
 		// Error Catch
-		if (!(Cursor_Pos + (y * Grid_X) + x >= Grid_Size))
+		if (true)
 		{
-			return;
+			return false;
 		}
 
-		// Y Motion
+		// Set Index of Cursor
 
-		// X Motion
 
 		// Update Graphics
+
+		return false;
 	}
 
-	public void _InputDelayRefresh()
+	public void _Input_Delay_Refresh()
 	{
 		Input_Is_Delay = false;
 	}
 	
-	public void ActivateInputDelay()
+	private void Activate_Input_Delay()
 	{
 		Input_Is_Delay = true;
 		GetNode<Timer>("InputDelay").Start();
+	}
+
+	private void Cursor_Pos_Refresh(Vector2 pos)
+	{
+		GetNode<Label>("Coordinates").Text = pos.ToString();
 	}
 }
