@@ -37,6 +37,7 @@ public partial class GameState : Node
 		for (int index = 0; index < Grid_Size; index++)
 		{
 			GameBoard[index].Is_Cursor = false;
+			GameBoard[index].Board_Pos = new Vector2(index % Grid_X, index / Grid_X);
 		}
 
 		// Place cursor on first tile.
@@ -49,27 +50,39 @@ public partial class GameState : Node
 	{
 		if (!Input_Is_Delay)
 		{
-			if (Input.IsActionPressed("CursorUp"))
+			if (Input.IsActionPressed("CursorUp") && Cursor_Pos <= (Grid_X * Grid_Y) - Grid_X - 1)
 			{
 				Cursor.Cursor_Up();
+				GameBoard[Cursor_Pos].Is_Cursor = false;
+				Cursor_Pos += Grid_X;
+				GameBoard[Cursor_Pos].Is_Cursor = true;
 				Activate_Input_Delay();
 			}
-			else if (Input.IsActionPressed("CursorDown"))
+			else if (Input.IsActionPressed("CursorDown") && Cursor_Pos >= Grid_X)
 			{
 				Cursor.Cursor_Down();
+				GameBoard[Cursor_Pos].Is_Cursor = false;
+				Cursor_Pos -= Grid_X;
+				GameBoard[Cursor_Pos].Is_Cursor = true;
 				Activate_Input_Delay();
 			}
-			if (Input.IsActionPressed("CursorLeft"))
+			if (Input.IsActionPressed("CursorLeft") && (Cursor_Pos % 16) != 0)
 			{
 				Cursor.Cursor_Left();
+				GameBoard[Cursor_Pos].Is_Cursor = false;
+				Cursor_Pos -= 1;
+				GameBoard[Cursor_Pos].Is_Cursor = true;
 				Activate_Input_Delay();
 			}
-			else if (Input.IsActionPressed("CursorRight"))
+			else if (Input.IsActionPressed("CursorRight") && (Cursor_Pos % 16) - 15 != 0)
 			{
 				Cursor.Cursor_Right();
+				GameBoard[Cursor_Pos].Is_Cursor = false;
+				Cursor_Pos += 1;
+				GameBoard[Cursor_Pos].Is_Cursor = true;
 				Activate_Input_Delay();
 			}
-			Cursor_Pos_Refresh(Cursor.Position);
+			Cursor_Pos_Refresh(GameBoard[Cursor_Pos].Board_Pos);
 		}
 	}
 
